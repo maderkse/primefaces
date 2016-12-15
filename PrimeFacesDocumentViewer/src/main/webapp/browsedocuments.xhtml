@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
+<f:metadata>
+	<f:event type="preRenderView" listener="#{documentView.initRequest}" />
+</f:metadata>
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>Document Viewer</title>
+	</f:facet>
+</h:head>
+
+<h:body>
+	<h:form id="form1">
+		<p:layout id="layout1" fullPage="true">
+   			<p:layoutUnit id="layoutunit2" position="west" size="33%">
+        		<p:outputPanel id="outputpanel3">
+					<p:commandButton value="Change pdf" id="changePdf" update=":form1:outputpanel4" actionListener="#{documentView.change}"  />
+					<p:treeTable id="treetable1" value="#{documentView.root}" var="document" selectionMode="checkbox" selection="#{documentView.selectedNodes}" emptyMessage="Geen documenten gevonden." widgetVar="w_treetable1" scrollable="true" scrollHeight="100%" liveResize="true">
+						<p:ajax event="select" listener="#{documentView.onNodeSelect}" update=":form1:outputpanel4"/>
+						<p:ajax event="unselect" listener="#{documentView.onNodeUnselect}" update=":form1:outputpanel4"/>
+        				<p:column headerText="Name">
+            				<h:outputText value="#{document.name}" />
+        				</p:column>
+        				<p:column id ="size" headerText="Size">
+            				<h:outputText value="#{document.size}" />
+        				</p:column>
+					</p:treeTable>
+				</p:outputPanel>
+    		</p:layoutUnit>
+ 
+    		<p:layoutUnit position="center" size="67%">
+				<p:outputPanel id="outputpanel4">
+					<iframe id="iframe1" src="#{documentView.iframeUrl}" width="100%" height="100%" scrolling="no" frameborder="0"></iframe>
+				</p:outputPanel>
+    		</p:layoutUnit>
+		</p:layout>
+	</h:form>
+</h:body>
+</html>

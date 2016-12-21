@@ -1,0 +1,5 @@
+org\primefaces\showcase\view\data\treetable\BasicView.class
+org\primefaces\showcase\domain\Document.class
+com\capgemini\jsf\utils\About.class
+org\primefaces\showcase\service\DocumentService.class
+com\tutorialspoint\test\HelloWorld.class
